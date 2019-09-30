@@ -5,4 +5,4 @@ apt-get -y update
 
 # Update Ubuntu
 apt-get -y upgrade
-apt-get -y dist-upgrade
+apt-get -o Dpkg::Options::='--force-confold' --force-yes -fuy dist-upgrade
