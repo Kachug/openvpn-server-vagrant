@@ -7,7 +7,7 @@ if [ "$name" = "" ]; then
   exit;
 fi
 
-cd ~/openvpn-ca
+cd /home/ubuntu/openvpn-ca
 source vars
 
 # And error ending in "ending in error 23" is expected

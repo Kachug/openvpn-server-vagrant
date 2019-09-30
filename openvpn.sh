@@ -34,7 +34,7 @@ sed -i "s/export KEY_OU=\"[^\"]*\"/export KEY_OU=\"${KEY_OU}\"/" vars
 sed -i "s/export KEY_NAME=\"[^\"]*\"/export KEY_NAME=\"server\"/" vars
 
 # Build the Certificate Authority
-source vars
+source ./vars
 ./clean-all
 yes "" | ./build-ca
 
