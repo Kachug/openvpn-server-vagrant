@@ -6,8 +6,6 @@
 # yes "" | ./build-key ${name}
 
 set name [lindex $argv 0];
-cd /home/ubuntu/openvpn-ca
-source vars
 
 spawn ./build-key $name
 expect "Country Name"
