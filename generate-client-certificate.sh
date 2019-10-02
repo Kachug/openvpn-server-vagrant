@@ -12,6 +12,6 @@ if [ "$name" = "" ]; then
   exit;
 fi
 
-cd ~/openvpn-ca
+cd $HOME/openvpn-ca
 source vars
 $sd/build-key.sh $name

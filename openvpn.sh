@@ -21,8 +21,8 @@ source ./interfaces.sh
 apt-get -y install openvpn easy-rsa expect
 
 # Set up the CA directory
-make-cadir ~/openvpn-ca
-cd ~/openvpn-ca
+make-cadir $HOME/openvpn-ca
+cd $HOME/openvpn-ca
 
 # Update vars
 sed -i "s/export KEY_COUNTRY=\"[^\"]*\"/export KEY_COUNTRY=\"${KEY_COUNTRY}\"/" vars
@@ -44,7 +44,7 @@ $sd/build-key-server.sh
 openvpn --genkey --secret keys/ta.key
 
 # Copy the files to the OpenVPN directory
-cd ~/openvpn-ca/keys
+cd $HOME/openvpn-ca/keys
 cp ca.crt ca.key server.crt server.key ta.key dh2048.pem /etc/openvpn
 gunzip -c /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz | sudo tee /etc/openvpn/server.conf
 
@@ -75,19 +75,19 @@ systemctl start openvpn@server
 systemctl enable openvpn@server
 
 # Create the client config directory structure
-mkdir -p ~/client-configs/files
+mkdir -p $HOME/client-configs/files
 
 # Create a base configuration
-cp /usr/share/doc/openvpn/examples/sample-config-files/client.conf ~/client-configs/base.conf
-sed -i "s/remote my-server-1 1194/remote ${PUBLIC_IP} 1194/" ~/client-configs/base.conf
-sed -i "s/;user nobody/user nobody/" ~/client-configs/base.conf
-sed -i "s/;group nogroup/group nogroup/" ~/client-configs/base.conf
-sed -i "s/ca ca.crt/#ca ca.crt/" ~/client-configs/base.conf
-sed -i "s/cert client.crt/#cert client.crt/" ~/client-configs/base.conf
-sed -i "s/key client.key/#key client.key/" ~/client-configs/base.conf
-echo "cipher AES-128-CBC" >> ~/client-configs/base.conf
-echo "auth SHA256" >> ~/client-configs/base.conf
-echo "key-direction 1" >> ~/client-configs/base.conf
-echo "#script-security 2" >> ~/client-configs/base.conf
-echo "#up /etc/openvpn/update-resolv-conf" >> ~/client-configs/base.conf
-echo "#down /etc/openvpn/update-resolv-conf" >> ~/client-configs/base.conf
+cp /usr/share/doc/openvpn/examples/sample-config-files/client.conf $HOME/client-configs/base.conf
+sed -i "s/remote my-server-1 1194/remote ${PUBLIC_IP} 1194/" $HOME/client-configs/base.conf
+sed -i "s/;user nobody/user nobody/" $HOME/client-configs/base.conf
+sed -i "s/;group nogroup/group nogroup/" $HOME/client-configs/base.conf
+sed -i "s/ca ca.crt/#ca ca.crt/" $HOME/client-configs/base.conf
+sed -i "s/cert client.crt/#cert client.crt/" $HOME/client-configs/base.conf
+sed -i "s/key client.key/#key client.key/" $HOME/client-configs/base.conf
+echo "cipher AES-128-CBC" >> $HOME/client-configs/base.conf
+echo "auth SHA256" >> $HOME/client-configs/base.conf
+echo "key-direction 1" >> $HOME/client-configs/base.conf
+echo "#script-security 2" >> $HOME/client-configs/base.conf
+echo "#up /etc/openvpn/update-resolv-conf" >> $HOME/client-configs/base.conf
+echo "#down /etc/openvpn/update-resolv-conf" >> $HOME/client-configs/base.conf
