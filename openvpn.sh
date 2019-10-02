@@ -46,7 +46,7 @@ openvpn --genkey --secret keys/ta.key
 # Copy the files to the OpenVPN directory
 cd $HOME/openvpn-ca/keys
 cp ca.crt ca.key server.crt server.key ta.key dh2048.pem /etc/openvpn
-gunzip -c /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz | sudo tee /etc/openvpn/server.conf
+gunzip -c /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz | tee /etc/openvpn/server.conf
 
 # Adjust the OpenVPN configuration
 sed -i "s/;tls-auth ta.key 0/tls-auth ta.key 0\nkey-direction 0/" /etc/openvpn/server.conf
@@ -59,8 +59,8 @@ sed -i "s/#net.ipv4.ip_forward/net.ipv4.ip_forward/" /etc/sysctl.conf
 sysctl -p
 
 # Install iptables-persistent so that rules can persist across reboots
-echo iptables-persistent iptables-persistent/autosave_v4 boolean true | sudo debconf-set-selections
-echo iptables-persistent iptables-persistent/autosave_v6 boolean true | sudo debconf-set-selections
+echo iptables-persistent iptables-persistent/autosave_v4 boolean true | debconf-set-selections
+echo iptables-persistent iptables-persistent/autosave_v6 boolean true | debconf-set-selections
 apt-get install -y iptables-persistent
 
 # Edit iptables rules to allow for forwarding
