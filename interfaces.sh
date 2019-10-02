@@ -1,11 +1,11 @@
 #!/bin/bash
 
-DEVICES=$(ifconfig -s | grep -v "Iface\|lo\|tun0" | cut -d " " -f 1)
-NUMDEVICES=$(ifconfig -s | wc -l)
+DEVICES=$(ip -br addr | grep -v "Iface\|lo\|tun0\|tunl0" | cut -d " " -f 1)
+NUMDEVICES=$(ip -br addr | wc -l)
 VPNDEVICE=""
 
 # If we have an eth0 device, use that to maintain current functionality.
-if ifconfig -s | grep -q eth0
+if ip -br addr | grep -q eth0
 then
   export VPNDEVICE="eth0"
 
@@ -15,14 +15,14 @@ then
 elif [ $NUMDEVICES -eq 3 ] 
   then
   # no eth0 device, but only one option, use it.
-  export VPNDEVICE=$(ifconfig -s | tail -n 2 | cut -d " " -f 1 | grep -v "lo\|tun0")
+  export VPNDEVICE=$(ip -br addr | tail -n 2 | cut -d " " -f 1 | grep -v "lo\|tun0\|tunl0")
 
 # If we end up on a server that has multiple devices and no eth0, just ask.
 # This is fairly common, Docker containers, wifi cards, dual nics, etc.
 else
   echo "There are multiple network devices on this server:"
   echo ""
-  ifconfig -s | cut -d " " -f 1 | grep -v "Iface\|lo\|tun0"
+  ip -br addr | cut -d " " -f 1 | grep -v "Iface\|lo\|tun0\|tunl0"
   echo ""
   echo "Please type the name of the device you'd like to use"
   read VPNDEVICE
