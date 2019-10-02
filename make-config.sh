@@ -8,7 +8,7 @@ if [ "$name" = "" ]; then
 fi
 
 KEY_DIR=$HOME/openvpn-ca/keys
-OUTPUT_DIR=$HOME/client-configs/files
+OUTPUT_DIR=$HOME/client-configs/files/
 BASE_CONFIG=$HOME/client-configs/base.conf
 
 cat ${BASE_CONFIG} \
@@ -21,6 +21,8 @@ cat ${BASE_CONFIG} \
     <(echo -e '</key>\n<tls-auth>') \
     ${KEY_DIR}/ta.key \
     <(echo -e '</tls-auth>') \
-    > ${OUTPUT_DIR}/${name}.ovpn
+    > ${OUTPUT_DIR}/Intermx\ Corporate\ VPN.ovpn
+
+zip ${OUTPUT_DIR}/${name}.zip ${OUTPUT_DIR}/Intermx\ Corporate\ VPN.ovpn && rm ${OUTPUT_DIR}/Intermx\ Corporate\ VPN.ovpn
 
 # sed -i "s/group nogroup/group nobody/" ${OUTPUT_DIR}/${name}.ovpn
