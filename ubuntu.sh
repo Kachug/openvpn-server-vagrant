@@ -4,5 +4,5 @@
 apt-get -y update
 
 # Update Ubuntu
-apt-get -y upgrade
-apt-get -o Dpkg::Options::='--force-confold' --force-yes -fuy dist-upgrade
+DEBIAN_FRONTEND='noninteractive' apt-get -y -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' upgrade
+DEBIAN_FRONTEND='noninteractive' apt-get -y -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' dist-upgrade
