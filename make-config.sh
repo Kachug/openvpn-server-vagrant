@@ -23,6 +23,6 @@ cat ${BASE_CONFIG} \
     <(echo -e '</tls-auth>') \
     > ${OUTPUT_DIR}/Intermx\ Corporate\ VPN.ovpn
 
-zip ${OUTPUT_DIR}/${name}.zip ${OUTPUT_DIR}/Intermx\ Corporate\ VPN.ovpn && rm ${OUTPUT_DIR}/Intermx\ Corporate\ VPN.ovpn
+cd ${OUTPUT_DIR} && zip ${name}.zip Intermx\ Corporate\ VPN.ovpn && rm Intermx\ Corporate\ VPN.ovpn
 
 # sed -i "s/group nogroup/group nobody/" ${OUTPUT_DIR}/${name}.ovpn
