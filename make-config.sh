@@ -8,7 +8,7 @@ if [ "$name" = "" ]; then
 fi
 
 KEY_DIR=$HOME/openvpn-ca/keys
-OUTPUT_DIR=$HOME/client-configs/files/
+OUTPUT_DIR=$HOME/client-configs/files
 BASE_CONFIG=$HOME/client-configs/base.conf
 
 cat ${BASE_CONFIG} \
