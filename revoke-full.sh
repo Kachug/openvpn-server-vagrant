@@ -21,6 +21,3 @@ if [ $(grep -R 'crl-verify crl.pem' /etc/openvpn/server.conf | wc -l) -eq 0 ]; t
   echo "crl-verify crl.pem" >> /etc/openvpn/server.conf
   systemctl restart openvpn@server
 fi
-
-# Remove user ovpn bundle from client-configs/files
-rm $HOME/client-configs/files/$name.zip
